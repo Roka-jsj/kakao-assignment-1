@@ -11,6 +11,8 @@ const todoInput = document.getElementById('todo-input');
 const addBtn = document.getElementById('add-btn');
 const todoListContainer = document.getElementById('todo-list');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const progressText = document.getElementById("progress-text");
+const progressFill = document.getElementById('progress-fill');
 
 // 주간 네비게이션 DOM 선택
 const prevWeekBtn = document.getElementById('prev-week-btn');
@@ -62,6 +64,7 @@ function renderWeeklyCalendar() {
     const todayString = getFormattedDate(new Date());
     const selectedString = getFormattedDate(currentSelectedDate);
 
+    
     // 월요일(0)부터 일요일(6)까지 반복하며 날짜 카드 생성
     for (let i = 0; i < 7; i++) {
         const currentDay = new Date(currentViewMonday);
@@ -113,6 +116,28 @@ function renderWeeklyCalendar() {
         
         weekCalendarContainer.appendChild(dayCard);
     }
+}
+
+// 통계 대시보드를 업데이트하는 독립된 함수
+function updateDashboard() {
+    // 1. 현재 선택된 날짜 문자열 가져오기
+    const selectedString = getFormattedDate(currentSelectedDate);
+    // 2. 선택된 날짜의 할 일만 걸러내기 (네가 짠 코드 활용!)
+    const todayTodos = todoListState.filter(todo => todo.date === selectedString);
+    // 3. 전체 개수 구하기
+    const totalCount = todayTodos.length;
+    // 4. 완료된 개수 구하기 (filter 한 번 더 사용!)
+    const completeCount = todayTodos.filter(todo => todo.isCompleted === true).length;
+    // 5. 퍼센트 계산하기 (0으로 나누기 방지 및 스코프 밖 선언)
+    let progress = 0;
+    if (totalCount > 0) {
+        // 소수점이 나오지 않게 반올림(Math.round) 처리
+        progress = Math.round((completeCount / totalCount) * 100); 
+    }
+
+    // 6. DOM 요소에 값 넣어주기 (화면에 반영!)
+    progressText.textContent = `${progress}% (${completeCount}/${totalCount})`;
+    progressFill.style.width = `${progress}%`;
 }
 
 // --- Todo 핵심 CRUD 함수들 ---
@@ -185,12 +210,16 @@ function changeFilter(filterType) {
     renderTodos(); 
 }
 
+
+
 // --- 화면 렌더링 함수 ---
 
 function renderTodos() {
     todoListContainer.innerHTML = '';
 
     // 1. 현재 선택된 날짜 기준 필터링
+
+    updateDashboard();
     const targetDateString = getFormattedDate(currentSelectedDate);
     let filteredTodos = todoListState.filter(todo => todo.date === targetDateString);
 
