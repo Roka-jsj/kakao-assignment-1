@@ -1,0 +1,305 @@
+/* 기본 초기화 및 폰트 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+}
+
+body {
+    background-color: #f7f8fa;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/* 메인 컨테이너 스타일 */
+.app-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #672be0; /* 메인 컬러 적용 */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 주간 뷰 스타일 */
+.weekly-section {
+    margin-bottom: 24px;
+}
+
+.week-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 10px;
+}
+
+.date-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.nav-btn {
+    background-color: transparent;
+    color: #672be0;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: 1px solid #e8def8;
+    border-radius: 6px;
+}
+
+.nav-btn:hover {
+    background-color: #e8def8;
+}
+
+.week-calendar {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.day-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.day-card:hover {
+    background-color: #f0f0f0;
+}
+
+.day-name {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.day-num {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.todo-count {
+    font-size: 11px;
+    background-color: #e0e0e0;
+    color: #555;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.day-card.selected {
+    border-color: #672be0;
+    background-color: #e8def8;
+}
+
+.day-card.today .day-num {
+    color: #672be0;
+    font-weight: 800;
+}
+
+.todo-count.has-todos {
+    background-color: #672be0;
+    color: white;
+}
+
+/* 통계 대시보드 스타일 (새로 추가됨) */
+.dashboard-section {
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dashboard-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.progress-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #672be0; /* 포인트 색상 적용 */
+}
+
+/* 게이지 바 배경 */
+.progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #e8def8; /* 연한 보라색 배경 */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* 게이지 바 채워지는 부분 */
+.progress-fill {
+    height: 100%;
+    width: 0%; /* 자바스크립트로 비율(%)을 계산해 동적으로 채워짐 */
+    background-color: #672be0; /* 메인 컬러 적용 */
+    border-radius: 10px;
+    /* 폭이 변할 때 부드럽게 움직이도록 애니메이션 부여 */
+    transition: width 0.4s ease-out; 
+}
+
+
+/* 입력 영역 스타일 */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#todo-input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#todo-input:focus {
+    border-color: #672be0;
+}
+
+/* 버튼 공통 스타일 */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+/* 추가 버튼 스타일 */
+#add-btn {
+    background-color: #672be0;
+    color: white;
+    padding: 0 20px;
+}
+
+#add-btn:hover {
+    background-color: #5523b8;
+}
+
+/* 필터 섹션 스타일 */
+.filter-section {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 12px;
+}
+
+.filter-btn {
+    background: none;
+    color: #666;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.filter-btn.active {
+    background-color: #672be0;
+    color: white;
+    font-weight: 600;
+}
+
+/* 할 일 목록 스타일 */
+#todo-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 개별 할 일 아이템 스타일 */
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #fafafa;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+}
+
+.todo-text {
+    flex: 1;
+    font-size: 16px;
+    word-break: break-all;
+    margin-right: 12px;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #a0a0a0;
+}
+
+/* 아이템 조작 버튼 그룹 */
+.action-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.action-buttons button {
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.btn-complete {
+    background-color: #e8def8;
+    color: #672be0;
+}
+.btn-complete:hover { background-color: #d1c4e9; }
+
+.btn-edit {
+    background-color: #f0f0f0;
+    color: #555;
+}
+.btn-edit:hover { background-color: #e0e0e0; }
+
+.btn-delete {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+.btn-delete:hover { background-color: #ffcdd2; }
