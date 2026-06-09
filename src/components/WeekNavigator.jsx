@@ -1,19 +1,12 @@
-import {
-  formatMonthTitle,
-  getFormattedDate,
-  getWeekDays,
-} from "../utils/date";
-
-function WeeklyCalendar({
-  weekStartDate,
+function WeekNavigator({
+  monthTitle,
+  weekDays,
+  todayString,
   selectedDate,
   todos,
   onMoveWeek,
   onSelectDate,
 }) {
-  const weekDays = getWeekDays(weekStartDate);
-  const todayString = getFormattedDate(new Date());
-
   return (
     <section className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4 flex items-center justify-between gap-3">
@@ -24,9 +17,7 @@ function WeeklyCalendar({
         >
           이전 주
         </button>
-        <h2 className="text-base font-bold text-slate-900">
-          {formatMonthTitle(weekStartDate)}
-        </h2>
+        <h2 className="text-base font-bold text-slate-900">{monthTitle}</h2>
         <button
           type="button"
           onClick={() => onMoveWeek(1)}
@@ -80,4 +71,4 @@ function WeeklyCalendar({
   );
 }
 
-export default WeeklyCalendar;
+export default WeekNavigator;
